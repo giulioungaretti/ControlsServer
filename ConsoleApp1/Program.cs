@@ -48,11 +48,7 @@ internal sealed class ConsoleHostedService : IHostedService
             {
                 try
                 {
-                    _ = doWork(_logger);
-                    _logger.LogInformation("Hello World!");
-
-                    // Simulate real work is being done
-                    await Task.Delay(1000);
+                    _ = await doWork(_logger);
                 }
                 catch (Exception ex)
                 {
@@ -123,8 +119,6 @@ internal sealed class ConsoleHostedService : IHostedService
 
             logger.LogInformation("Server started. Press Ctrl-C to exit...");
 
-            // wait for timeout or Ctrl-C
-
             // stop server. May have to wait for clients to disconnect.
             logger.LogInformation("Server stopped. Waiting for exit...");
             await server.StopAsync();
@@ -134,7 +128,7 @@ internal sealed class ConsoleHostedService : IHostedService
         }
         catch (Exception e)
         {
-            logger.LogError("The application exits with error: {0}", e.Message);
+            logger.LogError(e.Message);
             return 1;
         }
     }

@@ -83,8 +83,8 @@ internal sealed class ConsoleHostedService : IHostedService
         logger.LogInformation(message);
 
         // The application name and config file names
-        string applicationName = nameof(ControlsServer);
-        string configSectionName = nameof(ControlsServer);
+        string applicationName = "Workstation.ControlsServer";
+        string configSectionName = "ControlsServer";
         try
         {
             // TODO: do we need to configure-await to false ?

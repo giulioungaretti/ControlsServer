@@ -12,4 +12,10 @@
     <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Server" Version="1.4.372.76" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Update="ControlsServer.Config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

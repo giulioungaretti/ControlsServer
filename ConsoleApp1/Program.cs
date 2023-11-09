@@ -101,7 +101,7 @@ internal sealed class ConsoleHostedService : IHostedService
             };
 
             // load the server configuration, validate certificates
-            logger.LogInformation("Loading configuration from {0}.", configSectionName);
+            logger.LogInformation($"Loading configuration from {configSectionName}.{applicationName}");
             await server.LoadAsync(applicationName, configSectionName).ConfigureAwait(false);
 
 

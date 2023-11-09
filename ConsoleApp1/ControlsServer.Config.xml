@@ -3,8 +3,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
   xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd"
-> 
-  <ApplicationName>Quickstart Reference Server</ApplicationName>
+>
+  <ApplicationName>ControlsServer</ApplicationName>
   <ApplicationUri>urn:localhost:UA:ControlsServer</ApplicationUri>
   <ProductUri>uri:orgg.org:ControlsServer</ProductUri>
   <ApplicationType>Server_0</ApplicationType>

@@ -87,8 +87,8 @@ internal sealed class ConsoleHostedService : IHostedService
         logger.LogInformation(message);
 
         // The application name and config file names
-        string applicationName = "ConsoleReferenceServer";
-        string configSectionName = "Quickstarts.ReferenceServer";
+        string applicationName = nameof(ControlsServer);
+        string configSectionName = nameof(ControlsServer);
         try
         {
             // TODO: do we need to configure-await to false ?

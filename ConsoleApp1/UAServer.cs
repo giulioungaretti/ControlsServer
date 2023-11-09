@@ -8,7 +8,7 @@ using Opc.Ua.Server;
 
 using System.Text;
 
-namespace ConsoleApp1;
+namespace ControlsServer;
 
 public class UAServer<T> where T : StandardServer, new()
 {

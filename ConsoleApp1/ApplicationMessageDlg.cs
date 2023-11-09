@@ -2,7 +2,7 @@
 
 using System.Diagnostics;
 
-namespace ConsoleApp1
+namespace ControlsServer
 {
     internal class ApplicationMessageDlg : IApplicationMessageDlg
     {
@@ -23,7 +23,6 @@ namespace ConsoleApp1
         {
             Debug.WriteLine("show async called");
             return Task.FromResult(true);
-            //throw new NotImplementedException();
         }
     }
 }

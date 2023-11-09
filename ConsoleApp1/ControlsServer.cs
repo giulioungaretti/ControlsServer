@@ -1,8 +1,7 @@
 ﻿using Opc.Ua.Server;
 
-namespace ConsoleApp1
+namespace ControlsServer;
+
+internal class ControlsServer : StandardServer
 {
-    internal class ControlsServer : StandardServer
-    {
-    }
 }

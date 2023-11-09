@@ -7,7 +7,7 @@ using Opc.Ua;
 
 using System.Globalization;
 
-namespace ConsoleApp1;
+namespace ControlsServer;
 internal sealed class Program
 {
     private static async Task Main(string[] args)

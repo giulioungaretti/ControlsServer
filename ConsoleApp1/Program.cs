@@ -42,13 +42,12 @@ internal sealed class ConsoleHostedService : IHostedService
         _logger.LogDebug($"Starting with arguments: {string.Join(" ", Environment.GetCommandLineArgs())}");
         // Get the value as a string
         _ = _configuration["MyFirstArg"];
+        // NOTE: this seems silly and sketchy, investigate a simpler way to run a service in a console host
         _ = _appLifetime.ApplicationStarted.Register(() =>
-        {
-            _ = Task.Run(async () =>
             {
                 try
                 {
-                    _ = await doWork(_logger);
+                    _ = doWork(_logger, cancellationToken);
                 }
                 catch (Exception ex)
                 {
@@ -60,7 +59,6 @@ internal sealed class ConsoleHostedService : IHostedService
                     _appLifetime.StopApplication();
                 }
             });
-        });
 
         return Task.CompletedTask;
     }
@@ -69,7 +67,7 @@ internal sealed class ConsoleHostedService : IHostedService
     {
         return Task.CompletedTask;
     }
-    private async Task<int> doWork(ILogger logger)
+    private async Task<int> doWork(ILogger logger, CancellationToken ct)
     {
 
         // TODO: replace with logger
@@ -100,29 +98,26 @@ internal sealed class ConsoleHostedService : IHostedService
             logger.LogInformation($"Loading configuration from {configSectionName}.{applicationName}");
             await server.LoadAsync(applicationName, configSectionName).ConfigureAwait(false);
 
-
             // TODO: setup the logging
             // ConsoleUtils.ConfigureLogging(server.Configuration, applicationName, logConsole, LogLevel.Information);
 
             // check or renew the certificate
             logger.LogInformation("Check the certificate.");
-            await server.CheckCertificateAsync(renewCertificate);
-            //.ConfigureAwait(false);
+            await server.CheckCertificateAsync(renewCertificate).ConfigureAwait(false);
 
             // TODO: IDK Create and add the node managers
             //server.Create(Servers.Utils.NodeManagerFactories);
 
             // start the server
             logger.LogInformation("Start the server.");
-            await server.StartAsync();
-            //.ConfigureAwait(false);
+            await server.StartAsync().ConfigureAwait(false);
 
             logger.LogInformation("Server started. Press Ctrl-C to exit...");
+            _ = ct.WaitHandle.WaitOne();
 
             // stop server. May have to wait for clients to disconnect.
             logger.LogInformation("Server stopped. Waiting for exit...");
-            await server.StopAsync();
-            //.ConfigureAwait(false);
+            await server.StopAsync().ConfigureAwait(false);
 
             return 0;
         }

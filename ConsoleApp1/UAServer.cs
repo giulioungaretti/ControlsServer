@@ -37,7 +37,6 @@ public class UAServer<T> where T : StandardServer, new()
     {
         try
         {
-            ApplicationInstance.MessageDlg = new ApplicationMessageDlg(m_output);
             CertificatePasswordProvider PasswordProvider = new(Password);
             Application = new ApplicationInstance
             {

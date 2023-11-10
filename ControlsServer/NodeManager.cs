@@ -497,6 +497,13 @@ public class RobotNodeManager : CustomNodeManager2
         }
     }
 
+
+    private void Update<T>(BaseDataVariableState variable, T newValue)
+    {
+        variable.Value = newValue;
+        variable.Timestamp = DateTime.Now;
+        variable.ClearChangeMasks(SystemContext, false);
+    }
     private void DoSimulation(object state)
     {
         try
@@ -511,16 +518,17 @@ public class RobotNodeManager : CustomNodeManager2
                 double pressure = pressureState.Value switch
                 {
                     float f when f > 0 => f + ((Random.Shared.NextDouble() - 0.5) * 0.1),
-                    _ => 0
+                    _ => Random.Shared.NextDouble()
                 };
-                pressureState.Value = pressure;
+
+                Update(pressureState, pressure);
 
                 double temperature = temperatureState.Value switch
                 {
                     float f when f > 0 => f + ((Random.Shared.NextDouble() - 0.5) * 0.1),
-                    _ => 0
+                    _ => Random.Shared.NextDouble()
                 };
-                temperatureState.Value = temperature;
+                Update(temperatureState, temperature);
             }
         }
         catch (Exception e)
